@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Hello </h1>
+<form action="/index" method="GET">
+
+        <label>
+            <a href="/Blog-it">New Blog Post</a>   <a href="/">Main Page</a>
+        </label>
+
+        <h1>Blog History</h1>
+        <ul>
+            {% for blog in displayblog %}
+            <li>
+                <h3>{{blog.blogtitle}}</h3>
+                <p> {{blog.blogpost}}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </form>
+</form>
+
+{% endblock %}
