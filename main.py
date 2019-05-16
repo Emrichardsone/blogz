@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, flash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -7,7 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:locker@loc
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
-
+app.secret_key = "123"
 
 class Blog(db.Model):
 
@@ -18,9 +18,6 @@ class Blog(db.Model):
         self.blogpost = blogpost
         self.blogtitle = blogtitle
 
-def get_blog_posts():
-    return Blog.query.get()
-
 @app.route("/blog")
 def root():
     somevariable = request.args.get("id")
@@ -29,7 +26,6 @@ def root():
     return render_template("index.html", displayblog = Blog.query.all(), somevariable=somevariable, instanceofblogobject=instanceofblogobject)
 
 @app.route("/Blog-it", methods = ['GET', 'POST'])
-
 def blog():   
     if request.method == "POST":
         blog_title = request.form["blogtitle"]
@@ -38,35 +34,12 @@ def blog():
         db.session.add(blogsubmit)
         db.session.commit()
         blogid = blogsubmit.id
+        
         #if is_complete == True:
-        return render_template ("entry.html", blogsubmit = blogsubmit, )
+        return redirect("/blog?id="+str(blogid))
 
     else:
-        return redirect("/Blog-it")
-
-    
-#def is_complete():
-     #   error = ""
-        #blog_title = request.form["blogtitle"]
-        
-        #blogpost = request.form["textarea"]
-        #title_entered = len(blog_title)
-        #content_entered = len(blogpost)
-        #if title_entered < 0:
-         #   return True
-        #else:
-         #   error = error +"please enter a title"
-          #  return redirect ("/Blog-it", error = error)
-        
-       # if content_entered <0:
-        #    return True
-        #else:
-         #   error = error + "please enter text"
-          #  return redirect ("/Blog-it", error = error)
-
-
-
-
+        return render_template("Blog-it.html")
 
     
 if __name__=="__main__":

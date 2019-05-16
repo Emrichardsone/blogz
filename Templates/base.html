@@ -4,9 +4,12 @@
         <title>Blog</title>
 
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        
+
     </head>
-<body>
+<body>    
+        <label>
+            <a href="/Blog-it">New Blog Post</a>   <a href="/blog">Main Page</a>
+        </label>
 
     {% block content %}
     
