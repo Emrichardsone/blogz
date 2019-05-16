@@ -3,6 +3,14 @@
 {% block content %}
 
 <h1> Hello </h1>
+{%if displayblog | length == 0 %}
+    <p>No entries yet!</p>
+
+    {% elif somevariable %}
+    <p> <h1> {{instanceofblogobject.blogtitle}} </h1></p> 
+    <p> {{instanceofblogobject.blogpost}}</p> 
+
+    {%else%}
 <form action="/index" method="GET">
 
         <label>
@@ -13,12 +21,12 @@
         <ul>
             {% for blog in displayblog %}
             <li>
-                <h3>{{blog.blogtitle}}</h3>
+                <h3><a href = "/blog?id={{blog.id}}">{{blog.blogtitle}}</a></h3>
                 <p> {{blog.blogpost}}</p>
             </li>
             {% endfor %}
         </ul>
     </form>
 </form>
-
+{%endif%}
 {% endblock %}

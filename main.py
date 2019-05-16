@@ -21,24 +21,52 @@ class Blog(db.Model):
 def get_blog_posts():
     return Blog.query.get()
 
-@app.route("/")
+@app.route("/blog")
 def root():
-    return render_template("index.html", displayblog = Blog.query.all())
+    somevariable = request.args.get("id")
+    instanceofblogobject = Blog.query.filter_by(id = somevariable).first()
+    
+    return render_template("index.html", displayblog = Blog.query.all(), somevariable=somevariable, instanceofblogobject=instanceofblogobject)
 
 @app.route("/Blog-it", methods = ['GET', 'POST'])
 
-def blog():
-    
+def blog():   
     if request.method == "POST":
         blog_title = request.form["blogtitle"]
         blogpost = request.form["textarea"]
         blogsubmit = Blog(blogpost,blog_title )
         db.session.add(blogsubmit)
         db.session.commit()
-        return redirect ("/")  
+        blogid = blogsubmit.id
+        #if is_complete == True:
+        return render_template ("entry.html", blogsubmit = blogsubmit, )
+
     else:
-        return render_template("Blog-it.html")
-   
+        return redirect("/Blog-it")
+
+    
+#def is_complete():
+     #   error = ""
+        #blog_title = request.form["blogtitle"]
+        
+        #blogpost = request.form["textarea"]
+        #title_entered = len(blog_title)
+        #content_entered = len(blogpost)
+        #if title_entered < 0:
+         #   return True
+        #else:
+         #   error = error +"please enter a title"
+          #  return redirect ("/Blog-it", error = error)
+        
+       # if content_entered <0:
+        #    return True
+        #else:
+         #   error = error + "please enter text"
+          #  return redirect ("/Blog-it", error = error)
+
+
+
+
 
     
 if __name__=="__main__":
