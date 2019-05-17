@@ -11,13 +11,13 @@
     <p> {{instanceofblogobject.blogpost}}</p> 
 
     {%else%}
-<form action="/blog" method="POST">
+<form action="/" method="POST">
 
         <h1>Blog History</h1>
         <ul>
             {% for blog in displayblog %}
             <li>
-                <h3><a href = "/blog?id={{blog.id}}">{{blog.blogtitle}}</a></h3>
+                <h3><a href = "/?id={{blog.id}}">{{blog.blogtitle}}</a></h3>
                 <p> {{blog.blogpost}}</p>
             </li>
             {% endfor %}

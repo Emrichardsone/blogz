@@ -21,7 +21,7 @@ class Blog(db.Model):
 #The above is defining a class and setting up a database-to make a database work you have
 #to drop and create in python while MAMP is running
 
-@app.route("/blog")
+@app.route("/")
 def root():
     somevariable = request.args.get("id")
     instanceofblogobject = Blog.query.filter_by(id = somevariable).first()
@@ -49,7 +49,7 @@ def blog():
             db.session.add(blogsubmit)
             db.session.commit()
             blogid = blogsubmit.id
-            return redirect("/blog?id="+str(blogid))
+            return redirect("/?id="+str(blogid))
 
     else:
         return render_template("Blog-it.html")
