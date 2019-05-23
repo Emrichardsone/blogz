@@ -1,0 +1,11 @@
+{%extends "base.html"%}
+{%block content%}
+
+{%for blog in blogs%}
+<div>
+<h2><a href="/allposts?id={{blog.id}}">{{blog.blogtitle}}</a></h2>
+<p> {{blog.blogpost}}</p>
+<h6>authored by <a href="showblogs?user_id={{blog.owner.id}}">{{blog.owner.email}}</a></h6> 
+</div>
+{%endfor%}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+</ul>
+{% if somevariable%}
+<p><h1>{{theblog.blogtitle}}</h1></p>
+<p><h3>{{theblog.blogpost}}</h3></p>
+
+{% else %}
+{% for blog in allblogs %}
+<h2><div><a href="/allposts?id={{blog.id}}">{{blog.blogtitle}}</a></div></h2>
+<h4><p>{{blog.blogpost}}</p></h4>
+<h6>authored by <a href="showblogs?user_id={{blog.owner.id}}">{{blog.owner.email}}</a></h6>
+
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}

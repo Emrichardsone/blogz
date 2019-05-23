@@ -7,9 +7,16 @@
 
     </head>
 <body>    
-        <label>
-            <a href="/Blog-it">New Blog Post</a>   <a href="/">Main Page</a>
-        </label>
+       
+        <ul class="nav">
+           <li><a href="/Blog-it">New Blog Post</a></li> 
+           <li><a href="/">Main Page</a> </li> 
+           <li><a href="/signup">Register</a></li>
+           <li><a href="/login">Login</a></li>
+           <li><a href="/logout">logout</a></li>
+           <li><a href="/allposts">All Posts</a></li>
+        </ul>
+        
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <ul class=flashes></ul>
